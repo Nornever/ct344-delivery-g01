@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Delivery request | SwiftDrop</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+</head>
+
+<body>
+    <header><a class="brand" href="index.html">SwiftDrop</a>
+        <nav><a href="delivery.html">ส่งพัสดุ</a> · <a href="profile.html">ข้อมูลผู้ใช้</a></nav>
+    </header>
+    <main class="container narrow">
+        <p class="eyebrow">สวัสดีคุณ X</p>
+        <h1>Request a delivery</h1>
+        <p class="lead">Pick both locations on the map instead of typing two full addresses.</p>
+
+        <section aria-labelledby="location-heading">
+            <h2 id="location-heading">Choose locations on the map</h2>
+            <p>Choose which pin to edit, then click anywhere on the map. You can change either point freely.</p>
+
+            <!-- Step 5 improvement (my one usability change):
+                 I added a numbered 3-step guide above the map and put matching numbers on the buttons.
+                 Why does this reduce user effort or confusion? Users no longer have to guess the order
+                 of actions or which button comes next. The numbers show the path from pickup to
+                 destination to reserve, so there is less hesitation and fewer wrong clicks. -->
+            <ol class="steps" aria-label="Delivery steps">
+                <li>Press 1 and click the map to set the pickup point.</li>
+                <li>Press 2 and click the map to set the destination point.</li>
+                <li>Press 3 to reserve a driver once both pins are placed.</li>
+            </ol>
+
+            <div class="map-controls">
+                <button id="choose-pickup" type="button">1. Edit pickup pin</button>
+                <button id="choose-destination" type="button">2. Edit destination pin</button>
+            </div>
+            <p id="pickup-result" class="location-result">Pickup: not selected</p>
+            <p id="destination-result" class="location-result">Destination: not selected</p>
+            <p id="status" class="status" role="status">Click the map to choose pickup.</p>
+            <div id="map" aria-label="Map with selectable delivery locations"></div>
+            <button id="reserve" type="button" disabled>3. Reserve driver</button>
+            <p id="waiting" class="waiting" hidden>Finding a driver<span class="dots">...</span></p>
+            <section id="summary" class="estimate" hidden></section>
+            <button id="confirm" type="button">Confirm mock payment</button>
+        </section>
+    </main>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="js/delivery-free-map.js"></script>
+
+    <!-- Usability test task: A customer needs to send a parcel from CentralWorld to a friend's home near Chatuchak Park, then realises the pickup point is wrong and moves it to Victory Monument before booking a driver. -->
+    <!-- Expected evidence: I will watch for whether the person knows which button to press first, whether they find how to move the pickup pin, and whether they notice that Reserve driver only becomes active after both pins exist. I will note any hesitation or error and revise the step hints if needed. -->
+</body>
+
+</html>
